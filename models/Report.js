@@ -1,24 +1,23 @@
 const mongoose = require('mongoose');
 
-// Issue Schema
+// Report Schema
 
-let issueShema = mongoose.Schema({
+let reportSchema = mongoose.Schema({
     title: {
-        type: String,
-        required: true
-    },
-    author: {
         type: String,
         required: true
     },
     body: {
         type: String,
         required: true
+    },
+    message: {
+        type: String,
     }
 }, { timestamps : true });
 
 
-let Issue = mongoose.model('Issue', issueShema);
+let Report = mongoose.model('Report', reportSchema);
 
 
-module.exports = Issue; 
+module.exports = Report; 
