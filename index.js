@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
 const app = new express();
-const bcrypt = require('bcrypt');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -24,8 +24,9 @@ mongoose.set('strictQuery', true);
 
 // MiddleWARES
 app.set("views", path.join(__dirname, "views"));
+app.use(expressLayouts);
 app.set("view engine", "ejs");
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended : true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -42,12 +43,13 @@ app.use(methodOverride('_method'))
 
 
   
-  // Passport middleware
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  // Connect flash
-  app.use(flash());
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Connect flash
+app.use(flash());
 
 // Global variables
 app.use(function(req, res, next) {
@@ -56,14 +58,6 @@ app.use(function(req, res, next) {
     res.locals.error = req.flash('error');
     next();
   });
-
-
-// Issue Model
-
-const { render } = require('ejs');
-const { request } = require('http');
-const { error } = require('console');
-
 
 app.use('/', coreRoute)
 app.use('/reports/', reportRoute);

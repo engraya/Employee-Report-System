@@ -1,12 +1,29 @@
-<h2>New Report</h2>
-<br>
-<hr>
-<form action="/reports/create" method="POST">
-    <label for="title">Title</label>
-    <input type="text" name="title"><br>
-    <label for="body">Body</label>
-    <textarea rows="14" cols="30" name="body"></textarea><br>
-    <label for="body">Message</label>
-    <textarea rows="14" cols="30" name="message"></textarea><br>
-    <input type="submit" value="Submit">
-</form>
+<%- include('./partials/navbar') %>
+<h3 class="text-success justify-content-center align-items-center d-flex mt-4">New Report</h3>
+<a href="/reports"><button class="btn btn-sm btn-danger" type="submit">Back</button></a>
+<div class="container mt-5">
+<div class="card border-info mb-3 p-4" style="max-width: 70rem;">
+    <form action="/reports/create" method="POST">
+        <fieldset>
+          <legend class="text-align-center justify-content-center d-flex">New Report</legend>
+          <div class="form-group">
+            <label for="title" class="form-label mt-4">Title</label>
+            <input name="title" type="text" class="form-control"  placeholder="Enter Report Title">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea" class="form-label mt-4">Body</label>
+            <textarea name="body" class="form-control" rows="3" placeholder="Enter Report Body"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea" class="form-label mt-4">Comment</label>
+            <textarea name="comment" class="form-control" rows="3" placeholder="Enter your comments here"></textarea>
+          </div>
+          <button type="submit" class="btn btn-sm btn-success mt-2">Create</button>
+   
+        </fieldset>
+    </form>
+</div>
+</div>
+
+
+

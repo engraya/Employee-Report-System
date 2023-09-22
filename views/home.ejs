@@ -1,51 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Report Tracker</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-</head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #4292ca;">
-        <a class="navbar-brand" href="/">Employee Report Tracker</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation"></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/" aria-current="page">Home <span class="visually-hidden"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="reports/create" aria-current="page">New Report<span class="visually-hidden"></span></a>
-                </li>
-        </div>
-        <a href="users/logout">LOGOUT</a>
-        
-    </nav>
-
-    Welcome <%= name %>
-<h2>Report</h2>
-<hr>
-<div class="container p-3 m-3">
+<%- include('./partials/navbar') %>
+<div class="row mt-5">
+    <div class="container">
+        <form class="d-flex" action="/reports" method="GET">
+            <input class="form-control me-sm-2" type="text" name="title" value="<%= searchOptions.title %>" placeholder="Search for Reports">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
     <% reports.forEach(report => { %>
-        <a href="/reports/<%= report._id %>"><h4><%= report.title %></h4></a>
-        <p>Body: <%= report.body %></p>
-        <p>Message: <%= report.message %></p>
-        <small>Created at : <%= report.createdAt %></small><br>
-        <small>Updated at : <%= report.updatedAt %></small>
-        <hr>
-        <div class="container">
-            <span><a href="/reports/update/<%= report._id %>">UPDATE</a></span>
+<div class="col-md-6 d-flex mt-3">
+<div class="container">
+        <div class="card border-success mb-3" style="max-width: 40rem;">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="card-header"><a href="/reports/<%= report._id %>"><h6><%= report.title %></h6></a></div>
+                <div class="text-success mx-1"><a href="/reports/<%= report._id %>">View Comments</a></div>
+              </div>
+              <hr>
+            <div class="card-body">
+              <p class="card-text "> <%= report.body %></p>
+              <hr>
+              <small><span class="text-success">Created at </span>: <%= report.createdAt %> </small><br>
+              <small><span class="text-success">Last Updated at </span>: <%= report.updatedAt %> </small><br>
+              <hr>
+              <!-- <div class="container">
+                <a href="/reports/update/<%= report._id %>"><button type="button" class="btn btn-secondary">Update</button></a>
+            </div>
+            <div class="container">
+                <form action="/reports/delete/<%= report._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger float-end" type="submit">Delete</button>
+                </form>
+            </div> -->
+            </div>
         </div>
-        <div class="container">
-            <form action="/reports/delete/<%= report._id %>?_method=DELETE" method="POST">
-                <button class="btn btn-danger" type="submit">DELETE</button>
-            </form>
-        </div>
-    <% }) %>
 </div>
-</body>
-</html>
+</div>
+<% }) %>
+</div>
+<hr>
+<div>
+    <ul class="pagination align-content-center justify-content-center d-flex">
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&laquo;</a>
+      </li>
+      <li class="page-item active">
+        <a class="page-link" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">2</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">3</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">4</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">5</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#">&raquo;</a>
+      </li>
+    </ul>
+  </div>
+

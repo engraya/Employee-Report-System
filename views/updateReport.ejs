@@ -1,12 +1,31 @@
-<h2>Update Report</h2>
-<br>
-<hr>
-<form action="/reports/update/<%= report._id %>" method="POST">
-    <label for="title">Title</label>
-    <input type="text" name="title" value="<%= report.title %>"><br>
-    <label for="body">Body</label>
-    <textarea rows="12" cols="25" name="body" value="<%= report.body %>"></textarea><br>
-    <label for="message">Message</label>
-    <textarea rows="12" cols="25" name="message" value="<%= report.message %>"></textarea><br>
-    <input type="submit" value="Update">
-</form>
+<%- include('./partials/navbar') %>
+
+<h3 class="text-success justify-content-center align-items-center d-flex mt-3">Update Report</h3>
+<div class="container mt-3">
+    <a href="/reports"><button class="btn btn-sm btn-danger m-2" type="submit">Back</button></a>
+    <div class="card border-info mb-3 p-4" style="max-width: 70rem;">
+        <form action="/reports/update/<%= report._id %>" method="POST">
+            <fieldset>
+              <legend class="text-align-center justify-content-center d-flex">Update Report</legend>
+              <div class="form-group">
+                <label for="title" class="form-label mt-4">Title</label>
+                <input name="title" type="text" class="form-control"  value="<%= report.title %>" placeholder="Enter Report Title">
+              </div>
+              <div class="form-group">
+                <label for="body" class="form-label mt-4">Body</label>
+                <input name="body" class="form-control" type="text" rows="3"  value="<%= report.body %>" placeholder="Enter Report Body"></input>
+              </div>
+              <div class="form-group">
+                <label for="comment" class="form-label mt-4">Comment</label>
+                <input name="comment" class="form-control" type="text" rows="3"  value="<%= report.comment %>" placeholder="Enter your comments here"></input>
+              </div>
+              <button type="submit" class="btn btn-sm btn-success mt-4">Update</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+    
+
+
+
+

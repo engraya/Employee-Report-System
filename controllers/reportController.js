@@ -2,21 +2,26 @@ const Report = require('../models/Report');
 const { ensureAuthenticated } = require('../config/authConfig')
 
 
+const homePageController = async (request, response) => {
+    let query = Report.find()
+    if (request.query.title != null && request.query.title != '' ) {
+        query = query.regex('title', new RegExp(request.query.title, 'i'))
+    }
+    try {
+        const reports = await query.exec()
+        const context = { reports : reports, searchOptions : request.query, name : request.user.name}
+        response.render('home', context)
+    } catch {
+        response.render('core')
+    } 
 
-const homePageController = (request, response) => {
-    Report.find()
-        .then((result) => {
-            context = { reports: result, name : request.user.name}
-            response.render('home', context)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+
 }
 
 
 const createReportControllerGET = (request, response) => {
-    response.render('createReport')
+    context = {name : request.user.name}
+    response.render('createReport', context)
 }
 
 
@@ -47,7 +52,7 @@ const updateReportControllerGET = (request, response) => {
     const id = request.params.id;
     Report.findById(id)
         .then((result) => {
-            context = {report : result}
+            context = {report : result, name : request.user.name}
             response.render('updateReport', context)
 
         })
