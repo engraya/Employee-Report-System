@@ -4,6 +4,9 @@ const { ensureAuthenticated } = require('../config/authConfig')
 
 const homePageController = async (request, response) => {
     let query = Report.find()
+    const page = parseInt(request.query.page) || 1;
+    const perPage = 4; // Number of items to display per page
+    
     if (request.query.title != null && request.query.title != '' ) {
         query = query.regex('title', new RegExp(request.query.title, 'i'))
     }
@@ -14,7 +17,6 @@ const homePageController = async (request, response) => {
     } catch {
         response.render('core')
     } 
-
 
 }
 
