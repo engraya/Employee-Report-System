@@ -65,8 +65,8 @@ app.use('/users', usersRoute)
 
 
 
-const serverPort = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(serverPort, () => {
-    console.log(`Server is Listening on Port ${serverPort}........`)
+app.listen(PORT, () => {
+    console.log(`Server is Listening on Port ${PORT}........`)
 } )
